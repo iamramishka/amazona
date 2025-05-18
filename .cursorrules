@@ -61,7 +61,7 @@
   - [x] Order model
   - [x] Review model
   - [x] Cart model
-- [ ] Implement NextAuth.js authentication:
+- [-] Implement NextAuth.js authentication (Deferred):
   - Email/Password
   - OAuth providers (Google, GitHub)
   - JWT handling
@@ -70,17 +70,17 @@
 ### 3. Core Features - Customer Side [ ]
 
 - [ ] Home Layout:
-  - Create `(home)` folder in `app` directory
-  - Header with logo, search bar, and navigation
-  - Footer with links and social media
+  - [ ] Create `(home)` folder in `app` directory
+  - [ ] Header with logo, search bar, and navigation
+  - [ ] Footer with links and social media
 - [ ] Homepage:
-  - banner carousel
-  - latest products
+  - [ ] Banner carousel
+  - [ ] Latest products
 - [ ] Products Catalog:
-  - Sidebar with categories and filters
-  - Search results
-  - Product grid
-  - Pagination
+  - [ ] Sidebar with categories and filters
+  - [ ] Search results
+  - [ ] Product grid
+  - [ ] Pagination
 - [ ] Product pages:
   - Create product detail page layout
   - Implement image gallery with thumbnails

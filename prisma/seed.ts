@@ -31,7 +31,7 @@ async function main() {
     data: {
       name: 'T-shirts',
       description: 'Comfortable and stylish t-shirts',
-      image: '/images/categories/tshirts.jpg',
+      image: '/images/c-tshirts.jpg',
     },
   })
 
@@ -39,7 +39,7 @@ async function main() {
     data: {
       name: 'Jeans',
       description: 'Classic and modern jeans',
-      image: '/images/categories/jeans.jpg',
+      image: '/images/c-jeans.jpg',
     },
   })
 
@@ -47,7 +47,7 @@ async function main() {
     data: {
       name: 'Shoes',
       description: 'Trendy and comfortable shoes',
-      image: '/images/categories/shoes.jpg',
+      image: '/images/c-shoes.jpg',
     },
   })
 
@@ -58,7 +58,7 @@ async function main() {
       name: 'Classic White T-shirt',
       description: 'A timeless white t-shirt made from 100% cotton',
       price: 29.99,
-      images: ['/images/products/white-tshirt-1.jpg', '/images/products/white-tshirt-2.jpg'],
+      images: ['/images/p11-1.jpg', '/images/p11-2.jpg'],
       stock: 100,
       categoryId: tshirts.id,
     },
@@ -69,7 +69,7 @@ async function main() {
       name: 'Graphic Print T-shirt',
       description: 'Modern graphic print t-shirt with unique design',
       price: 34.99,
-      images: ['/images/products/graphic-tshirt-1.jpg', '/images/products/graphic-tshirt-2.jpg'],
+      images: ['/images/p12-1.jpg', '/images/p12-2.jpg'],
       stock: 75,
       categoryId: tshirts.id,
     },
@@ -81,7 +81,7 @@ async function main() {
       name: 'Slim Fit Blue Jeans',
       description: 'Classic slim fit jeans in vintage blue wash',
       price: 79.99,
-      images: ['/images/products/slim-jeans-1.jpg', '/images/products/slim-jeans-2.jpg'],
+      images: ['/images/p21-1.jpg', '/images/p21-2.jpg'],
       stock: 50,
       categoryId: jeans.id,
     },
@@ -92,7 +92,7 @@ async function main() {
       name: 'Relaxed Fit Black Jeans',
       description: 'Comfortable relaxed fit jeans in black',
       price: 69.99,
-      images: ['/images/products/black-jeans-1.jpg', '/images/products/black-jeans-2.jpg'],
+      images: ['/images/p22-1.jpg', '/images/p22-2.jpg'],
       stock: 60,
       categoryId: jeans.id,
     },
@@ -104,7 +104,7 @@ async function main() {
       name: 'Classic Sneakers',
       description: 'Versatile white sneakers for everyday wear',
       price: 89.99,
-      images: ['/images/products/sneakers-1.jpg', '/images/products/sneakers-2.jpg'],
+      images: ['/images/p31-1.jpg', '/images/p31-2.jpg'],
       stock: 40,
       categoryId: shoes.id,
     },
@@ -115,7 +115,7 @@ async function main() {
       name: 'Running Shoes',
       description: 'High-performance running shoes with cushioning',
       price: 129.99,
-      images: ['/images/products/running-shoes-1.jpg', '/images/products/running-shoes-2.jpg'],
+      images: ['/images/p32-1.jpg', '/images/p32-2.jpg'],
       stock: 30,
       categoryId: shoes.id,
     },
