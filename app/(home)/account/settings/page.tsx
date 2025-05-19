@@ -13,6 +13,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
@@ -30,12 +31,18 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
+import { Loader2 } from 'lucide-react'
+import { useToast } from '@/components/ui/use-toast'
 
-// Form validation schema
+// Form validation schema with improved validation rules
 const settingsSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  language: z.string(),
-  currency: z.string(),
+  email: z
+    .string()
+    .email('Invalid email address')
+    .min(5, 'Email must be at least 5 characters')
+    .max(100, 'Email must be less than 100 characters'),
+  language: z.string().min(1, 'Language is required'),
+  currency: z.string().min(1, 'Currency is required'),
   notifications: z.object({
     email: z.boolean(),
     sms: z.boolean(),
@@ -59,16 +66,35 @@ const mockSettings = {
 
 export default function SettingsPage() {
   const [isEditing, setIsEditing] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast()
 
   const form = useForm<SettingsFormValues>({
     resolver: zodResolver(settingsSchema),
     defaultValues: mockSettings,
   })
 
-  const onSubmit = (data: SettingsFormValues) => {
-    // In a real app, this would save to the database
-    console.log('Settings updated:', data)
-    setIsEditing(false)
+  const onSubmit = async (data: SettingsFormValues) => {
+    try {
+      setIsSubmitting(true)
+      // TODO: Implement settings update with API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate API call
+      console.log('Settings update:', data)
+      toast({
+        title: 'Settings updated',
+        description: 'Your settings have been updated successfully.',
+      })
+      setIsEditing(false)
+    } catch (error) {
+      console.error('Error updating settings:', error)
+      toast({
+        title: 'Error',
+        description: 'Failed to update settings. Please try again.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -97,8 +123,16 @@ export default function SettingsPage() {
                   <FormItem>
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
-                      <Input {...field} disabled={!isEditing} />
+                      <Input
+                        {...field}
+                        type="email"
+                        disabled={!isEditing || isSubmitting}
+                        placeholder="john@example.com"
+                      />
                     </FormControl>
+                    <FormDescription>
+                      This email will be used for account notifications
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -111,7 +145,7 @@ export default function SettingsPage() {
                     <FormItem>
                       <FormLabel>Language</FormLabel>
                       <Select
-                        disabled={!isEditing}
+                        disabled={!isEditing || isSubmitting}
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
@@ -127,6 +161,9 @@ export default function SettingsPage() {
                           <SelectItem value="de">German</SelectItem>
                         </SelectContent>
                       </Select>
+                      <FormDescription>
+                        Choose your preferred language
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -138,7 +175,7 @@ export default function SettingsPage() {
                     <FormItem>
                       <FormLabel>Currency</FormLabel>
                       <Select
-                        disabled={!isEditing}
+                        disabled={!isEditing || isSubmitting}
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
@@ -154,6 +191,9 @@ export default function SettingsPage() {
                           <SelectItem value="JPY">JPY (¥)</SelectItem>
                         </SelectContent>
                       </Select>
+                      <FormDescription>
+                        Choose your preferred currency
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -185,7 +225,7 @@ export default function SettingsPage() {
                       <Switch
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        disabled={!isEditing}
+                        disabled={!isEditing || isSubmitting}
                       />
                     </FormControl>
                   </FormItem>
@@ -206,7 +246,7 @@ export default function SettingsPage() {
                       <Switch
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        disabled={!isEditing}
+                        disabled={!isEditing || isSubmitting}
                       />
                     </FormControl>
                   </FormItem>
@@ -227,7 +267,7 @@ export default function SettingsPage() {
                       <Switch
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        disabled={!isEditing}
+                        disabled={!isEditing || isSubmitting}
                       />
                     </FormControl>
                   </FormItem>
@@ -246,10 +286,20 @@ export default function SettingsPage() {
                     form.reset()
                     setIsEditing(false)
                   }}
+                  disabled={isSubmitting}
                 >
                   Cancel
                 </Button>
-                <Button type="submit">Save Changes</Button>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    'Save Changes'
+                  )}
+                </Button>
               </>
             ) : (
               <Button type="button" onClick={() => setIsEditing(true)}>
