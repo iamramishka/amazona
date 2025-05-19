@@ -36,10 +36,28 @@
    className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
    ```
    This provides a modern, translucent effect with fallback for browsers that don't support backdrop-filter.
+7. When implementing forms with React Hook Form and Zod, use the following pattern for better type safety and validation:
+   ```typescript
+   const schema = z.object({
+     field: z.string().min(1, 'Field is required'),
+   })
+   type FormValues = z.infer<typeof schema>
+   const form = useForm<FormValues>({
+     resolver: zodResolver(schema),
+     defaultValues: {
+       field: '',
+     },
+   })
+   ```
+8. For responsive grid layouts, use the following pattern:
+   ```tsx
+   className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+   ```
+   This creates a single column on mobile, 2 columns on medium screens, and 3 columns on large screens.
 
 ## Scratchpad
 
-### 1. Project Setup and Configuration [ ]
+### 1. Project Setup and Configuration [x]
 
 - [x] Initialize Next.js 15 project with TypeScript
 - [x] Set up project structure and folders
@@ -82,20 +100,33 @@
 - [x] Homepage:
   - [x] Banner carousel
   - [x] Latest products
-- [ ] Products Catalog:
-  - [ ] Sidebar with categories and filters
-  - [ ] Search results
-  - [ ] Product grid
-  - [ ] Pagination
-- [ ] Product pages:
-  - [ ] Create product detail page layout
-  - [ ] Implement image gallery with thumbnails
-  - [ ] Add product information section
-  - [ ] Reviews and ratings section
-  - [ ] Related products section
-- [ ] Shopping cart
-- [ ] Checkout process
-- [ ] User dashboard
+- [x] Products Catalog:
+  - [x] Sidebar with categories and filters
+  - [x] Search results
+  - [x] Product grid
+  - [x] Pagination
+- [x] Product pages:
+  - [x] Create product detail page layout
+  - [x] Implement image gallery with thumbnails
+  - [x] Add product information section
+  - [x] Reviews and ratings section
+  - [x] Related products section
+- [x] Shopping cart:
+  - [x] Cart store with Zustand
+  - [x] Cart component
+  - [x] Add to cart functionality
+  - [x] Cart page
+- [x] Checkout process:
+  - [x] Multi-step checkout form
+  - [x] Shipping information
+  - [x] Payment form
+  - [x] Order summary
+- [x] User dashboard:
+  - [x] Dashboard layout with navigation
+  - [x] Profile management
+  - [x] Order history
+  - [x] Address management
+  - [x] Account settings
 
 ### 4. Admin Dashboard [ ]
 

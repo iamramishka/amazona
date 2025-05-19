@@ -5,9 +5,11 @@ import { Search, ShoppingCart, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
+import { useCartStore } from '@/lib/store/cart'
 
 export function Header() {
   const router = useRouter()
+  const totalItems = useCartStore((state) => state.totalItems)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -33,8 +35,12 @@ export function Header() {
           <Button variant="ghost" size="icon" asChild>
             <Link href="/cart">
               <ShoppingCart className="h-5 w-5" />
-              <span className="sr-only">Cart</span>
-            </Link>
+              {totalItems() > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+                  {totalItems()}
+                </span>
+              )}
+            </Button>
           </Button>
           <Button variant="ghost" size="icon" asChild>
             <Link href="/account">
